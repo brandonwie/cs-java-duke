@@ -1,0 +1,6 @@
+{
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "/Users/brandonwie/code/omscs/java/course1/courserajava.jar"
+  ]
+}
