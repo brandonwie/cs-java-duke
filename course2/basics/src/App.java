@@ -10,7 +10,17 @@ public class App {
     // cd.digitTest();
     // cd.conversionTest();
     CaesarCipher cc = new CaesarCipher();
-    cc.testCaesar();
+    // cc.testCaesar();
+    String result = cc
+        .encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21);
+    System.out.println(result);
+    // String result = cc.encrypt("At noon be in the conference room with your hat
+    // on for a surprise party. YELL LOUD!",
+    // 15);
+    // System.out.println(result);
+    // WordPlay wp = new WordPlay();
+    // String result = wp.emphasize("dna ctgaaactga", 'a');
+    // System.out.println(result);
   }
 
 }
