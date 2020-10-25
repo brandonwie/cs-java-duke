@@ -4,5 +4,9 @@
   "java.project.referencedLibraries": [
     "lib/**/*.jar",
     "/Users/brandonwie/code/omscs/java/courserajava.jar"
+  ],
+  "cSpell.ignoreWords": [
+    "abcdefghijklmnopqrstuvwxyz",
+    "rstuvwxyzabcdefghijklmnopq"
   ]
 }

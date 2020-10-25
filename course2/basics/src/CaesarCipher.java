@@ -9,32 +9,34 @@ public class CaesarCipher {
     // Compute the shifted alphabet
     String shiftedAlphabet = alphabet.substring(key) + alphabet.substring(0, key);
 
-    // Count from 0 to < length of encrypted, (call it i)
     for (int i = 0; i < encrypted.length(); i++) {
-      // Look at the ith character of encrypted (call it currChar)
       char currChar = encrypted.charAt(i);
-      // Find the index of currChar in the alphabet(call it idx)
-      int idx = alphabet.indexOf(currChar);
-      // If currChar is in the alphabet
-      if (idx != -1) {
-        // Get the idxth character of shiftedAlphabet (newChar)
-        char newChar = shiftedAlphabet.charAt(idx);
-        // Replace the ith character of encrypted with newChar
-        encrypted.setCharAt(i, newChar);
+      if (Character.isLowerCase(currChar)) {
+        char currUpperChar = Character.toUpperCase(currChar);
+        int idx = alphabet.indexOf(currUpperChar);
+        if (idx != -1) {
+          char newChar = shiftedAlphabet.charAt(idx);
+          char originalChar = Character.toLowerCase(newChar);
+          encrypted.setCharAt(i, originalChar);
+        }
+      } else if (Character.isUpperCase(currChar)) {
+        int idx = alphabet.indexOf(currChar);
+        if (idx != -1) {
+          char newChar = shiftedAlphabet.charAt(idx);
+          encrypted.setCharAt(i, newChar);
+        }
       }
-      // Otherwise: do nothing
     }
-    // The answer is the String inside of encrypted
     return encrypted.toString();
   }
 
   public void testCaesar() {
-    int key = 17;
+    int key = 19;
     FileResource fr = new FileResource();
     String message = fr.asString();
     String encrypted = encrypt(message, key);
     System.out.println(encrypted);
-    String decrypted = encrypt(encrypted, 26 - key);
+    String decrypted = encrypt(encrypted, (26 - key));
     System.out.println(decrypted);
   }
 }
