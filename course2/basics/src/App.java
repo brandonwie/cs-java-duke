@@ -6,9 +6,11 @@ public class App {
     // System.out.println(result1);
     // System.out.println(result2);
 
-    CharacterDemo cd = new CharacterDemo();
+    // CharacterDemo cd = new CharacterDemo();
     // cd.digitTest();
-    cd.conversionTest();
+    // cd.conversionTest();
+    CaesarCipher cc = new CaesarCipher();
+    cc.testCaesar();
   }
 
 }
