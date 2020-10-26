@@ -24,8 +24,10 @@ public class App {
     // System.out.println(result);
     // DiceRolling dr = new DiceRolling();
     // dr.simulate(1000);
-    CommonWords cw = new CommonWords();
-    cw.countShakespeare();
+    // CommonWords cw = new CommonWords();
+    // cw.countShakespeare();
+    WordLengths wl = new WordLengths();
+    wl.testCountWordLengths();
   }
 
 }
