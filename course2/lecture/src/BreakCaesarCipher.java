@@ -1,3 +1,7 @@
+/**
+ * Contains basic methods to break Caesar Cipher
+ */
+
 public class BreakCaesarCipher {
   public int[] countLetters(String message) {
     String alph = "abcdefghijklmnopqrstuvwxyz";

@@ -32,11 +32,17 @@ public class WordLengths {
     int[] counts = new int[31];
     countWordLengths(fr, counts);
     int maxIndex = indexOfMax(counts);
+    int mostCommonLen = 0;
     for (int i = 0; i < counts.length; i++) {
-      if (counts[i] != 0) {
+      int len = counts[i];
+      if (len == maxIndex) {
+        mostCommonLen = i;
+      }
+      if (len != 0) {
         System.out.println(counts[i] + " words of length of " + i);
       }
     }
-    System.out.println("most common length: " + maxIndex);
+    System.out.println("Num of most common length: " + maxIndex);
+    System.out.println("Most common length: " + mostCommonLen);
   }
 }

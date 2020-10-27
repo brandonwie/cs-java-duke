@@ -57,4 +57,35 @@ public class CaesarCipher {
     }
     return sb.toString();
   }
+
+  /**
+   * Using For Loops to break two-key Caesar Cipher using eyeball method
+   */
+  public void decryptCipherWithTwoKeys() {
+    FileResource fr = new FileResource();
+    String file = fr.asString();
+    int mostCountedE = 0;
+    int iIndex = 0;
+    int jIndex = 0;
+    String maxEStr = "";
+    for (int i = 0; i < 26; i++) {
+      for (int j = 0; j < 26; j++) {
+        String s = encryptTwoKeys(file, i, j);
+        int countCharE = 0;
+        for (int k = 0; k < s.length(); k++) {
+          char c = s.charAt(k);
+          if (Character.toLowerCase(c) == 'e') {
+            countCharE++;
+          }
+        }
+        if (countCharE > mostCountedE) {
+          mostCountedE = countCharE;
+          maxEStr = s;
+          iIndex = i;
+          jIndex = j;
+        }
+      }
+    }
+    System.out.println(maxEStr + "\nFirst Index: " + iIndex + "\tSecond Index: " + jIndex);
+  }
 }

@@ -9,8 +9,11 @@ public class App {
     // CharacterDemo cd = new CharacterDemo();
     // cd.digitTest();
     // cd.conversionTest();
+
+    // Breaking two-key encryption using an eyeball method
     // CaesarCipher cc = new CaesarCipher();
-    // cc.testCaesar();
+    // String quiz8 = cc.encryptTwoKeys("Top ncmy qkff vi vguv vbg ycpx", 24, 65);
+    // System.out.println(quiz8);
     // String result = cc
     // .encryptTwoKeys("At noon be in the conference room with your hat on for a
     // surprise party. YELL LOUD!", 8, 21);
@@ -26,8 +29,9 @@ public class App {
     // dr.simulate(1000);
     // CommonWords cw = new CommonWords();
     // cw.countShakespeare();
-    WordLengths wl = new WordLengths();
-    wl.testCountWordLengths();
+    // WordLengths wl = new WordLengths();
+    // wl.testCountWordLengths();
+    // CaesarBreaker cb = new CaesarBreaker();
+    // cb.testDecrypt();
   }
-
 }
