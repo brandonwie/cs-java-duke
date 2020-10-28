@@ -5,13 +5,22 @@ public class WordLengths {
     for (String word : resource.words()) {
       char firstChar = word.charAt(0);
       char lastChar = word.charAt(word.length() - 1);
-      if (!Character.isLetter(firstChar) && !Character.isLetter(lastChar)) {
-        word = word.substring(1, word.length() - 1);
-      } else if (Character.isLetter(firstChar) && !Character.isLetter(lastChar)) {
-        word = word.substring(0, word.length() - 1);
-      } else if (!Character.isLetter(firstChar) && Character.isLetter(lastChar)) {
-        word = word.substring(1);
+      if (word.length() == 1) {
+        if (Character.isLetter(firstChar)) {
+          word = String.valueOf(firstChar);
+        } else {
+          continue;
+        }
+      } else {
+        if (!Character.isLetter(firstChar) && !Character.isLetter(lastChar)) {
+          word = word.substring(1, word.length() - 1);
+        } else if (Character.isLetter(firstChar) && !Character.isLetter(lastChar)) {
+          word = word.substring(0, word.length() - 1);
+        } else if (!Character.isLetter(firstChar) && Character.isLetter(lastChar)) {
+          word = word.substring(1);
+        }
       }
+
       int len = word.length();
       counts[len] += 1;
     }
