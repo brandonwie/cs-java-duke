@@ -17,7 +17,7 @@ public class BreakCaesarCipher {
   }
 
   public String decrypt(String encrypted) {
-    CaesarCipher cc = new CaesarCipher();
+    CaesarCipherOld cc = new CaesarCipherOld();
     int[] freqs = countLetters(encrypted);
     int maxDex = maxIndex(freqs);
     int dkey = maxDex - 4;

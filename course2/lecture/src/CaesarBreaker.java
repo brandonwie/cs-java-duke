@@ -20,7 +20,7 @@ public class CaesarBreaker {
   }
 
   public String decrypt(String encrypted) {
-    CaesarCipher cc = new CaesarCipher();
+    CaesarCipherOld cc = new CaesarCipherOld();
     int[] freqs = countLetters(encrypted);
     int maxDex = maxIndex(freqs);
     int dkey = maxDex - 4;
@@ -56,7 +56,7 @@ public class CaesarBreaker {
   }
 
   public String decryptTwoKeys(String encrypted) {
-    CaesarCipher cc = new CaesarCipher();
+    CaesarCipherOld cc = new CaesarCipherOld();
     String firstStr = halfOfString(encrypted, 0);
     String secondStr = halfOfString(encrypted, 1);
     int firstKey = getKey(firstStr);
@@ -76,7 +76,7 @@ public class CaesarBreaker {
    * Using For Loops to break two-key Caesar Cipher using eyeball method
    */
   public void decryptCipherWithTwoKeys() {
-    CaesarCipher cc = new CaesarCipher();
+    CaesarCipherOld cc = new CaesarCipherOld();
     FileResource fr = new FileResource();
     String file = fr.asString();
     int mostCountedE = 0;

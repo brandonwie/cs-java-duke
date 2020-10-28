@@ -33,5 +33,11 @@ public class App {
     // wl.testCountWordLengths();
     // CaesarBreaker cb = new CaesarBreaker();
     // cb.testDecrypt();
+
+    // Graded Quiz
+    CaesarCipher cc = new CaesarCipher(15);
+    String answer1 = cc.encrypt("Can you imagine life WITHOUT the internet AND computers in your pocket?");
+    System.out.println(answer1);
+
   }
 }

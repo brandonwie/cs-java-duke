@@ -1,60 +1,31 @@
-import edu.duke.*;
-
 public class CaesarCipher {
-  public String encrypt(String input, int key) {
-    // Make a StringBuilder with message (encrypted)
-    StringBuilder encrypted = new StringBuilder(input);
-    // Write down the alphabet
-    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    // Compute the shifted alphabet
-    String shiftedAlphabet = alphabet.substring(key) + alphabet.substring(0, key);
+  // Fields
+  private String alphabet; // instance variable
+  private String shiftedAlphabet;
+  private int mainKey;
 
-    for (int i = 0; i < encrypted.length(); i++) {
-      char currChar = encrypted.charAt(i);
-      if (Character.isLowerCase(currChar)) {
-        char currUpperChar = Character.toUpperCase(currChar);
-        int idx = alphabet.indexOf(currUpperChar);
-        if (idx != -1) {
-          char newChar = shiftedAlphabet.charAt(idx);
-          newChar = Character.toLowerCase(newChar);
-          encrypted.setCharAt(i, newChar);
-        }
-      } else if (Character.isUpperCase(currChar)) {
-        int idx = alphabet.indexOf(currChar);
-        if (idx != -1) {
-          char newChar = shiftedAlphabet.charAt(idx);
-          encrypted.setCharAt(i, newChar);
-        }
-      }
-    }
-    return encrypted.toString();
+  // constructor
+  public CaesarCipher(int key) {
+    mainKey = key;
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    shiftedAlphabet = alphabet.substring(key) + alphabet.substring(0, key);
   }
 
-  public void testCaesar() {
-    int key = 15;
-    FileResource fr = new FileResource();
-    String message = fr.asString();
-    String encrypted = encrypt(message, key);
-    System.out.println(encrypted);
-    String decrypted = encrypt(encrypted, (26 - key));
-    System.out.println(decrypted);
-  }
-
-  public String encryptTwoKeys(String input, int key1, int key2) {
-    StringBuilder sb = new StringBuilder(input);
+  public String encrypt(String input) {
+    StringBuilder sb = new StringBuilder();
     for (int i = 0; i < sb.length(); i++) {
-      char ch = sb.charAt(i);
-      String chToStr = Character.toString(ch);
-      if (i % 2 == 0) {
-        String oddEncrypt = encrypt(chToStr, key1);
-        char encryptedCh = oddEncrypt.charAt(0);
-        sb.setCharAt(i, encryptedCh);
-      } else {
-        String evenEncrypt = encrypt(chToStr, key2);
-        char encryptedCh = evenEncrypt.charAt(0);
-        sb.setCharAt(i, encryptedCh);
+      char c = sb.charAt(i);
+      int idx = alphabet.indexOf(c);
+      if (idx != -1) {
+        c = shiftedAlphabet.charAt(idx);
+        sb.setCharAt(i, c);
       }
     }
     return sb.toString();
+  }
+
+  public String decrypt(String input) {
+    CaesarCipher cc = new CaesarCipher(26 - mainKey);
+    return cc.encrypt(input);
   }
 }
