@@ -3,7 +3,7 @@
 > Course of Duke University - Coursera</br>
 > Author: Seokhyun Wie (Brandon) &copy;
 
-# Arrays, Lists, and Sturctured Data
+## Week1 ) Arrays, Lists, and Structured Data
 
 ## A. Caesar Cipher Algorithm
 
@@ -21,10 +21,10 @@
 
 ### 3. Count
 
-1. assign all alphabets to a _**String**_
-1. create an **Array** with a length of 26 that matches with _**String**_
-1. loop through each letter of input and compare with the _**String**_
-1. increase elements in the **Array** that has the same index in _**String**_
+1. assign all alphabets to a ***String***
+1. create an **Array** with a length of 26 that matches with ***String***
+1. loop through each letter of input and compare with the ***String***
+1. increase elements in the **Array** that has the same index in ***String***
 
 ### 4. Breaking Caesar Cipher
 
@@ -115,3 +115,74 @@ counters[123] = counters[123] + 1;
 - Abstraction: separation of **interface** + **implementation**
   - public - interface: What it does
   - private - implementation: How it does it (fields, helpers)
+
+---
+
+## Week2 ) Arrays, Lists, and Structured Data
+
+### GladLibs
+
+#### 1. Thinking About Data: Types
+
+> Benefits and Drawbacks
+
+- **StorageResource**
+  - No need to know size, add as needed
+  - Must iterate over all elements, but random choice?
+- **String[] array**
+  - Easy to choose at random, pick an index
+  - Must know capacity of array when creating
+- **New Concept**: ArrayList
+
+### 2. **ArrayList** as a Solution
+
+- Class **ArrayList** in package `java.util`
+- Expand as needed using `.add` method
+- Provides access via index to any element in list
+- Essential in implementing StorageResource
+- Basic syntax
+
+  ```java
+  ArrayList<String> words = new ArrayList<String>();
+  words.add("hello");
+  words.add("hello");
+  String s = words.get(1);
+  words.set(0, "goodbye");
+  ```
+
+### 3. Arrays and ArrayList
+
+- `String[] a` and `ArrayList<String> b`
+  - `a[k]` compared `b.get()` and `b.set()`
+- `int[] ac` and `ArrayList<Integer> bc`
+  - Concerns with int/Integer conversions
+  - `ac[index]++` works
+  - `bc.get(index)++` DOES NOT WORK
+- But, arrays don't grow, that's a concern!
+
+### Sum1. ArrayList
+
+- Indexable collection, like array, but growable
+  - Access via integer index, start with zero
+  - import java.util.ArrayList or java.util.*;
+  - Create with generic: **ArrayList\<Integer\>**
+- Common methods for ArrayList
+  - `.add(elt)` - added to end of ArrayList
+  - `.size()` - returns number of elements in ArrayList
+
+### Sum2. ArrayList with Indexing Loops
+
+- Access elements via indexing
+  - Start with zero, loop to less than `.size()`
+  - Access via `.get(index)`
+  - Do not call `.remove()` during iteration
+
+  ```java
+  ArrayList<String> a = new ArrayList<String>();
+  // add elements
+
+  for (int k=0; k< a.size(); k++) {
+    String s = a.get(k);
+    // process s
+  }
+  ```
