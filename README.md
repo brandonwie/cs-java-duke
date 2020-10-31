@@ -193,3 +193,65 @@ counters[123] = counters[123] + 1;
   - Experience comes from bad judgment
 - Software can be brittle
 - Open/Closed: open for extension, closed for modification
+
+### HashMap (New structures for Data and Classes)
+
+- Replace seven or more instance variables by one instance variable
+
+  ```java
+  private HashMap<String, ArrayList<String>> myMap;
+  ```
+
+- Sequence of if-statements in getSubstitute replaced by one statement with HashMap
+
+  ```java
+  private String getSubstitute(String label) {
+    if (label.equals("number")) {
+      return "" + myRandom.nextInt(50) + 5;
+    }
+    return randomFrom(myMap.get(label));
+  }
+  ```
+
+  - HashMap is better, filename and lable linked
+  - What changes for <verb> if stored in verb.txt?
+
+  ```java
+  private void initializeFromSource(String source) {
+    String[] labels = {"country", "noun", "animal", "adjective", "name", "color", "timeframe"};
+    for (String s : labels) {
+      ArrayList<String> list = readIt(source+"/"+s+".txt");
+      myMap.put(s, list);
+    }
+  }
+  ```
+
+- File associates label and replacement info
+  - `.properties` or `property file`
+  - Often used in Java applications (and others)
+  - Read file, store info in `HashMap
+
+  ```url
+  verb:http://gladlibs.com/verbs.txt
+  noun:http://gladlibs.com/nouns-funny.txt
+  color:http://gladlibs.com/colors.txt
+  ```
+
+## ArrayList
+
+- Indexable collection of elements
+  - Stores objects, not primitives, so Integer not int
+  - Two step process to update Integer values
+- Accessible via import `java.util.ArrayList`
+- Methods: `add()`, `size()`, `get()`, `set()`, `indexOf()`
+- Examine elements with iterable or looping over valid indexes
+
+## HashMap
+
+- Collection of (key, value) pairs, with keys mapping to values
+  - Both are objects, so Integer rather than int
+  - Key best as immutable type, like String or Integer
+  - Value can be anything, ArrayList, String, Integer
+- Accessible via import `java.util.HashMap`
+- Methods: `put()`, `size()`, `get()`, `keySet()`, `containsKey()`
+- Examine elements with iterable over keyset, cannot access via index

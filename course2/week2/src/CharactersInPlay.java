@@ -43,19 +43,40 @@ public class CharactersInPlay {
     }
   }
 
+  private static boolean isStringUpperCase(String str) {
+
+    // convert String to char array
+    char[] charArray = str.toCharArray();
+
+    for (int i = 0; i < charArray.length; i++) {
+
+      // if any character is not in upper case, return false
+      if (!Character.isUpperCase(charArray[i]))
+        return false;
+    }
+
+    return true;
+  }
+
   public void tester() {
     findAllChracters();
     int max = 0;
     int index = 0;
     for (int i = 0; i < names.size(); i++) {
+      String name = names.get(i);
       int count = counts.get(i);
-      if (count > max) {
-        max = count;
-        index = i;
+
+      if (isStringUpperCase(name)) {
+        System.out.println(name + ": " + count);
       }
+
+      // if (count > max) {
+      // max = count;
+      // index = i;
+      // }
     }
     System.out.println("main character: " + names.get(index) + " with " + max + " lines");
-    charactersWithNumParts(10, 15);
+    charactersWithNumParts(50, 200);
   }
 
   public void charactersWithNumParts(int num1, int num2) {
@@ -63,7 +84,7 @@ public class CharactersInPlay {
     for (int i = 0; i < names.size(); i++) {
       int count = counts.get(i);
       if (count >= num1 && count <= num2) {
-        System.out.println(names.get(i));
+        System.out.println(names.get(i) + " " + counts.get(i));
       }
     }
   }

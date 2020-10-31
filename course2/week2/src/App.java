@@ -6,7 +6,17 @@ public class App {
     // wwa.tester();
     // CharactersInPlay cp = new CharactersInPlay();
     // cp.tester();
-    GladLib gl = new GladLib();
-    gl.makeStory();
+    // GladLib gl = new GladLib();
+    // gl.makeStory();
+    // WordFrequenciesMap wfm = new WordFrequenciesMap();
+    // wfm.tester();
+
+    // QUIZ PART
+    // CodonPractice cp = new CodonPractice();
+    // cp.tester();
+    WordsInFiles wif = new WordsInFiles();
+    wif.tester();
+    // GladLibMap glm = new GladLibMap();
+    // glm.makeStory();
   }
 }
