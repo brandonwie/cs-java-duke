@@ -4,8 +4,9 @@ public class App {
     // wf.tester();
     // WordsWithArrays wwa = new WordsWithArrays();
     // wwa.tester();
-    CharactersInPlay cp = new CharactersInPlay();
-    cp.tester();
+    // CharactersInPlay cp = new CharactersInPlay();
+    // cp.tester();
+    GladLib gl = new GladLib();
+    gl.makeStory();
   }
-
 }

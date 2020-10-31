@@ -134,7 +134,7 @@ counters[123] = counters[123] + 1;
   - Must know capacity of array when creating
 - **New Concept**: ArrayList
 
-### 2. **ArrayList** as a Solution
+#### 2. **ArrayList** as a Solution
 
 - Class **ArrayList** in package `java.util`
 - Expand as needed using `.add` method
@@ -150,7 +150,7 @@ counters[123] = counters[123] + 1;
   words.set(0, "goodbye");
   ```
 
-### 3. Arrays and ArrayList
+#### 3. Arrays and ArrayList
 
 - `String[] a` and `ArrayList<String> b`
   - `a[k]` compared `b.get()` and `b.set()`
@@ -160,7 +160,7 @@ counters[123] = counters[123] + 1;
   - `bc.get(index)++` DOES NOT WORK
 - But, arrays don't grow, that's a concern!
 
-### Sum1. ArrayList
+#### Sum1. ArrayList
 
 - Indexable collection, like array, but growable
   - Access via integer index, start with zero
@@ -170,7 +170,7 @@ counters[123] = counters[123] + 1;
   - `.add(elt)` - added to end of ArrayList
   - `.size()` - returns number of elements in ArrayList
 
-### Sum2. ArrayList with Indexing Loops
+#### Sum2. ArrayList with Indexing Loops
 
 - Access elements via indexing
   - Start with zero, loop to less than `.size()`
@@ -186,3 +186,10 @@ counters[123] = counters[123] + 1;
     // process s
   }
   ```
+
+### Extending Programs and Classes
+
+- Good design or good judgment comes from experience
+  - Experience comes from bad judgment
+- Software can be brittle
+- Open/Closed: open for extension, closed for modification
