@@ -255,3 +255,35 @@ counters[123] = counters[123] + 1;
 - Accessible via import `java.util.HashMap`
 - Methods: `put()`, `size()`, `get()`, `keySet()`, `containsKey()`
 - Examine elements with iterable over keyset, cannot access via index
+
+---
+
+## Week3 ) Log Files
+
+### Understanding log
+
+|Log|110.76.104.12|-|-|[30/Sep/2015:07:47:11 -0400]|"GET //favicon.ico HTTP/1.1"|200|3426|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+|field|User IP|who|username/pw|time|type of request|status|bytes
+|type|`String`|||`Date`|`String`|`int`|`int`|
+
+- IP can be used by Java built-in `Class`, but no need at this point
+- Date can be `String`
+
+```java
+public class LogEntry {
+  private String ipAddress;
+  private Date accessTime;
+  private String request;
+  private int statusCode;
+  private int bytesReturned;
+
+  public LogEntry(String line) // and parse inside
+}
+```
+
+### Equality
+
+- Two different kinds of equality:
+  - `==`: check if refers to the same exact object
+  - `.equals()`: same meaning
