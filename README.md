@@ -301,3 +301,13 @@ if(!counts.containsKey(ip)) {
 // into one line of code
 counts.merge(ip, 1, Integer::sum);
 ```
+
+## Week4 ) Vegenere Cipher (progressive-alphabet cipher)
+
+> polyalphabetic substitution with alphabets derived from one pair of primary alphabets by sliding(as in the Vegenere tableau) for which the usual keying formula is `P + K = C` where `P` is the position of the plaintext letter in the plain component, `C` that of the ciphertext letter in the cipher sequence, and `K` that of the key letter in the normal alphabet and where positions are numbered from 0 to 25 and 26 is subtracted from sums above 25
+
+|Message|Meet Me At Dawn|
+|-:|:-|
+|Key| DICEDICEDICEDICE|
+|Num| 3824382438243824|
+|Encrypted|Pmgx Ug Db Hdep|
