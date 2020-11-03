@@ -286,4 +286,18 @@ public class LogEntry {
 
 - Two different kinds of equality:
   - `==`: check if refers to the same exact object
-  - `.equals()`: same meaning
+  - `.equals()`: same logical meaning
+    - Defined by class: default `==`
+
+### Replace if/else statement with `.merge`
+
+```java
+if(!counts.containsKey(ip)) {
+  counts.put(ip,1);
+} else {
+  int val = counts.get(ip);
+  counts.replace(ip, val+1)
+}
+// into one line of code
+counts.merge(ip, 1, Integer::sum);
+```

@@ -1,3 +1,10 @@
+
+/**
+ * Write a description of class LogAnalyzer here.
+ *
+ * @author Seokhyun Wie
+ * @version 11/02/2020
+ */
 import java.util.*;
 import edu.duke.*;
 
@@ -8,6 +15,11 @@ public class LogAnalyzer {
     records = new ArrayList<>();
   }
 
+  /**
+   *
+   * @param fname
+   * @return create <code>ArrayList of LogEntries</code> by reading line by line
+   */
   public void readFile(String fname) {
     records.clear();
     String path = "data/" + fname;
@@ -16,6 +28,120 @@ public class LogAnalyzer {
       LogEntry logEntry = WebLogParser.parseEntry(log);
       records.add(logEntry);
     }
+  }
+
+  /**
+   * Read LogEntry Records
+   *
+   * @return HashMap [IPs, Count]
+   */
+  public HashMap<String, Integer> countVisitsPerIP() {
+    // <String IP, Integer count>
+    HashMap<String, Integer> counts = new HashMap<>();
+    for (LogEntry le : records) {
+      String ip = le.getIpAddress();
+      // check if ip is in counts
+      // if (!counts.containsKey(ip)) {
+      // counts.put(ip, 1);
+      // } else {
+      // int val = counts.get(ip);
+      // counts.replace(ip, val + 1);
+      // }
+      // Java 8 feature
+      counts.merge(ip, 1, Integer::sum);
+    }
+    return counts;
+  }
+
+  /**
+   *
+   * @param countsPerIP HashMap [IPs, Counts]
+   * @return max count only
+   */
+  public int mostNumberVisitsByIP(HashMap<String, Integer> countsPerIP) {
+    int max = 0;
+    for (Integer count : countsPerIP.values()) {
+      if (count > max)
+        max = count;
+    }
+    return max;
+  }
+
+  /**
+   *
+   * @param ipCount HashMap<String IP, Integer Count>
+   * @return most visited IPs
+   */
+  public ArrayList<String> iPsMostVisits(HashMap<String, Integer> ipCount) {
+    ArrayList<String> ips = new ArrayList<>();
+    int max = mostNumberVisitsByIP(ipCount);
+    for (String ip : ipCount.keySet()) {
+      if (ipCount.get(ip).equals(max)) {
+        ips.add(ip);
+      }
+    }
+    return ips;
+  }
+
+  /**
+   * Read records(LogEntries)
+   *
+   * @return HashMap [String Date, ArrayList IPs] : IPs per Date
+   */
+  public HashMap<String, ArrayList<String>> iPsForDays() {
+    HashMap<String, ArrayList<String>> ipsPerDay = new HashMap<>();
+    for (LogEntry le : records) {
+      String date = le.getAccessTime().toString();
+      date = date.substring(4, 10);
+      String ip = le.getIpAddress();
+      if (ipsPerDay.containsKey(date)) {
+        ipsPerDay.get(date).add(ip);
+      } else {
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add(ip);
+        ipsPerDay.put(date, temp);
+      }
+    }
+    return ipsPerDay;
+  }
+
+  /**
+   *
+   * @param ipsPerDay HashMap [String Date, ArrayList IPs]
+   * @return Date with max length of value
+   */
+  public String dayWithMostIPVisits(HashMap<String, ArrayList<String>> ipsPerDay) {
+    int max = 0;
+    String maxDate = "";
+    for (String date : ipsPerDay.keySet()) {
+      int len = ipsPerDay.get(date).size();
+      if (len > max) {
+        max = len;
+        maxDate = date;
+      }
+    }
+    return maxDate;
+  }
+
+  /**
+   *
+   * @param ipsPerDay
+   * @param day
+   * @return IPs that visit the most on the day
+   */
+  public ArrayList<String> iPsWithMostVisitsOnDay(HashMap<String, ArrayList<String>> ipsPerDay, String day) {
+    // new hashmap to count ips
+    HashMap<String, Integer> counter = new HashMap<>();
+
+    ArrayList<String> ips = ipsPerDay.get(day);
+    for (String ip : ips) {
+      if (counter.containsKey(ip)) {
+        counter.put(ip, counter.get(ip) + 1);
+      } else {
+        counter.put(ip, 1);
+      }
+    }
+    return iPsMostVisits(counter);
   }
 
   /**
@@ -56,7 +182,6 @@ public class LogAnalyzer {
       String date = fullDate.substring(4, 10);
       String ipAddr = le.getIpAddress();
       if (date.equals(someday) && !visits.contains(ipAddr)) {
-        System.out.println(ipAddr);
         visits.add(ipAddr);
       }
     }
@@ -72,7 +197,6 @@ public class LogAnalyzer {
       if (!ips.contains(ip)) {
         if (statusCode >= low && statusCode <= high) {
           ips.add(ip);
-          System.out.println(ip);
           total += 1;
         }
       }
