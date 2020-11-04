@@ -311,3 +311,24 @@ counts.merge(ip, 1, Integer::sum);
 |Key| DICEDICEDICEDICE|
 |Num| 3824382438243824|
 |Encrypted|Pmgx Ug Db Hdep|
+
+### HashSet
+
+- ArrayList: would work fine
+  - Read file,  `.add()` each word to list
+  - Use `.contains()` to check if word in list
+- Better: HashSet&lt;String&gt;
+  - Use `.add()` and `.contains()`
+  - `.contains()` will be much faste
+
+### Split String into Words
+
+```java
+for (String word: decryptedMessage.split("\\W")) {
+}
+```
+
+- Need to split String up into words
+  - Can use `.split()`
+  - Pass in `"\\W"`
+    - Divides between "non-word" characters
