@@ -2,9 +2,9 @@ package demos;
 
 /** A class to represent Airport data.
  * Used in module 6 of the UC San Diego MOOC Object Oriented Programming in Java
- *
+ * 
  * @author UC San Diego Intermediate Software Development MOOC team
- *
+ * 
  *
  */
 public class Airport implements Comparable<Airport> {
@@ -20,8 +20,8 @@ public class Airport implements Comparable<Airport> {
 	private float timezone;
 	private char dst;
 	private String dbTimezone;
-
-
+	
+	
 	public Airport(int airportID, String name, String city, String country, String code3, String code4, double latitude,
 			double longitude, int altitude, float timezone, char dst, String dbTimezone) {
 		this.airportID = airportID;
@@ -73,10 +73,10 @@ public class Airport implements Comparable<Airport> {
 	public String getDbTimezone() {
 		return dbTimezone;
 	}
-
+	
 	public int compareTo(Airport other)
 	{
 		return this.city.compareTo(other.city);
 	}
-
+	
 }
