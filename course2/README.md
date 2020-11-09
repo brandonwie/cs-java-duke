@@ -1,9 +1,9 @@
-# Note (Java Programming)
+# Course2. Arrays, Lists, and Structured Data
 
 > Course of Duke University - Coursera</br>
 > Author: Seokhyun Wie (Brandon) &copy;
 
-## Week1 ) Arrays, Lists, and Structured Data
+## Week1 ) Encrypt, Decrypt
 
 ## A. Caesar Cipher Algorithm
 

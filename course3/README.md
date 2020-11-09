@@ -1,4 +1,4 @@
-# Object Oriented Programming in Java
+# Course3-1. Object Oriented Programming in Java
 
 ## What to learn in this course
 
@@ -78,5 +78,3 @@
 ## Week 2 ) Memory Models, Scope, and Project
 
 - primitive types don't need arrows (means no reference to a heap because it's just a value)
-
-

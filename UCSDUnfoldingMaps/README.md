@@ -1,4 +1,4 @@
-# Object Oriented Java Programming
+# Course3-2. Object Oriented Programming in Java
 
 ## Week 4)
 
