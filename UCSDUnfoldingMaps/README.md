@@ -50,30 +50,30 @@
 
 #### Inheritance Example
 
-```java
-public class Person {
-  private String name;
-  public String getName() {return name;}
-}
+  ```java
+  public class Person {
+    private String name;
+    public String getName() {return name;}
+  }
 
-public class Student extends Person {
-  private int id;
-  public int getID() {return id;}
-}
+  public class Student extends Person {
+    private int id;
+    public int getID() {return id;}
+  }
 
-public class Faculty extends Person {
-  private String id;
-  public String getID() {return id;}
-}
-```
+  public class Faculty extends Person {
+    private String id;
+    public String getID() {return id;}
+  }
+  ```
 
-```java
-Student s = new Student();
-Person p = new Person();
-Person q = new Person();
-Faculty f = new Faculty();
-Object o = new Faculty();
-```
+  ```java
+  Student s = new Student();
+  Person p = new Person();
+  Person q = new Person();
+  Faculty f = new Faculty();
+  Object o = new Faculty();
+  ```
 
 1. `String n = s.getName();` [o]
    1. `Student` inherits `Person`, so can access `.getName()` in `Person`
@@ -132,104 +132,104 @@ Object o = new Faculty();
   }
   ```
 
-```java
-  public class Person extends Object {
+  ```java
+    public class Person extends Object {
+      private String name;
+
+      public Person(String n) {
+        super();
+        this.name = n;
+      }
+    }
+
+    public class Student extends Person {
+      public Student(String n) {
+        //super();
+        //this.name = n;  COMPILE ERROR
+        super(n); // pass variable via super()
+      }
+
+      // add NO-ARG default constructor
+      public Student() {
+        // super("Student"); can be, but not a good idea
+        this("Student"); // Use our same class constructor
+      }
+    }
+  ```
+
+### Concept Challenge #1
+
+  ```java
+  public class Person {
+    private String name;
+    public Person(String n) { // 4
+      this.name = n; // 5
+      System.out.print("#1 "); // 6
+    }
+  }
+
+  public class Student extends Person {
+    public Student() {
+      this("Student"); // 1
+      System.out.print("#2 "); // 8
+    }
+    public Student(String n) { // 2
+      super(n); // 3
+      System.out.print("#3 "); // 7
+    }
+  }
+
+  Student s = new Student();
+  ```
+
+### Concept Challenge #2
+
+  ```java
+  public class Person {
     private String name;
 
     public Person(String n) {
       super();
       this.name = n;
     }
+    public void setName(String n) {
+      this.name = n;
+    }
   }
 
   public class Student extends Person {
-    public Student(String n) {
-      //super();
-      //this.name = n;  COMPILE ERROR
-      super(n); // pass variable via super()
-    }
-
-    // add NO-ARG default constructor
     public Student() {
-      // super("Student"); can be, but not a good idea
-      this("Student"); // Use our same class constructor
+      // super(); will be inserted by compiler
+      // but there's nothing with no-arg constructor in Person
+      // therefore, Java throws compiler error
+      this.setName("Student");
     }
   }
-```
 
-### Concept Challenge #1
-
-```java
-public class Person {
-  private String name;
-  public Person(String n) { // 4
-    this.name = n; // 5
-    System.out.print("#1 "); // 6
-  }
-}
-
-public class Student extends Person {
-  public Student() {
-    this("Student"); // 1
-    System.out.print("#2 "); // 8
-  }
-  public Student(String n) { // 2
-    super(n); // 3
-    System.out.print("#3 "); // 7
-  }
-}
-
-Student s = new Student();
-```
-
-### Concept Challenge #2
-
-```java
-public class Person {
-  private String name;
-
-  public Person(String n) {
-    super();
-    this.name = n;
-  }
-  public void setName(String n) {
-    this.name = n;
-  }
-}
-
-public class Student extends Person {
-  public Student() {
-    // super(); will be inserted by compiler
-    // but there's nothing with no-arg constructor in Person
-    // therefore, Java throws compiler error
-    this.setName("Student");
-  }
-}
-
-Student s = new Student();
-```
+  Student s = new Student();
+  ```
 
 ### Overloading vs Overriding
 
 - **Overloading**: **Same class** has same method name with **different** parameters
 - **Overriding**: **Subclass** has same method name with the **same parametes** as the superclass
 
-```java
-public class Person {
-  private String name;
+  ```java
+  public class Person {
+    private String name;
 
-  public String toString() {
-    return this.getName();
+    public String toString() {
+      return this.getName();
+    }
   }
-}
-// assume ctor
-Person p  = new Person("Tim");
-System.out.println(p.toString()); // calls Person's toString() (override)
-System.out.println(p); // calls Object's toString() method
-// if you ever pass an object as parameter to print line,
-// it automatically calls toString() method
+  // assume ctor
+  Person p  = new Person("Tim");
+  System.out.println(p.toString()); // calls Person's toString() (override)
+  System.out.println(p); // calls Object's toString() method
+  // if you ever pass an object as parameter to print line,
+  // it automatically calls toString() method
 
-```
+  ```
 
 ## Polymorphism
 
@@ -239,19 +239,19 @@ System.out.println(p); // calls Object's toString() method
 > Person s = new Student("Cara", 1234);
 > ```
 
-```java
-// assume appropriate ctors
-// in main
-Person p[] = new Person[3];
-p[0] = new Person( "Tim" );
-p[1] = new Student( "Cara", 1234);
-p[2] = new Faculty( "Mia", "ABCD" );
+  ```java
+  // assume appropriate ctors
+  // in main
+  Person p[] = new Person[3];
+  p[0] = new Person( "Tim" );
+  p[1] = new Student( "Cara", 1234);
+  p[2] = new Faculty( "Mia", "ABCD" );
 
-for(int i = 0; i < p.length; i++)
-{
-  System.out.println( p[i] );
-}
-```
+  for(int i = 0; i < p.length; i++)
+  {
+    System.out.println( p[i] );
+  }
+  ```
 
 ### Compile-time vs Runtime rules
 
@@ -315,78 +315,78 @@ Step 2. Runtime environment executes interpreted code
 
 ### Polymorphism Part 1
 
-```java
-public class Person
-{
-  private String name;
-
-  public Person(String name)  { this.name = name; }
-  public boolean isAsleep(int hr)  { return 22 < hr || 7 > hr; }
-  public String toString()      { return name; }
-
-  public void status( int hr )
+  ```java
+  public class Person
   {
-    if ( this.isAsleep( hr ) )
-      System.out.println( "Now offline: " + this );
-    else
-      System.out.println( "Now online: " + this );
+    private String name;
+
+    public Person(String name)  { this.name = name; }
+    public boolean isAsleep(int hr)  { return 22 < hr || 7 > hr; }
+    public String toString()      { return name; }
+
+    public void status( int hr )
+    {
+      if ( this.isAsleep( hr ) )
+        System.out.println( "Now offline: " + this );
+      else
+        System.out.println( "Now online: " + this );
+    }
   }
-}
 
-public class Student extends Person
-{
-  public Student(String name)  {
-    super(name);
+  public class Student extends Person
+  {
+    public Student(String name)  {
+      super(name);
+    }
+
+    public boolean isAsleep( int hr ) // override
+    { return 2 < hr && 8 > hr; }
   }
 
-  public boolean isAsleep( int hr ) // override
-  { return 2 < hr && 8 > hr; }
-}
-
-Person p;
-p = new Student("Sally");
-p.status(1);
-// 1. at runtime Java will take `p` as a Student object
-// 2. Student doesn't have `status` method, so Java will look for super class Person
-// 3. In `this.isAsleep(hr) `this` will point Student object because it's called from Student object (Dynamic Binding)
-// 4. so it will follow Student's `isAsleep()` method
-```
+  Person p;
+  p = new Student("Sally");
+  p.status(1);
+  // 1. at runtime Java will take `p` as a Student object
+  // 2. Student doesn't have `status` method, so Java will look for super class Person
+  // 3. In `this.isAsleep(hr) `this` will point Student object because it's called from Student object (Dynamic Binding)
+  // 4. so it will follow Student's `isAsleep()` method
+  ```
 
 ### Polymorphism Part 2
 
-```java
-public class Person {
-    public void method1() {
-        System.out.print("Person 1 ");
-    }
-    public void method2() {
-        System.out.print("Person 2 ");
-    }
-}
+  ```java
+  public class Person {
+      public void method1() {
+          System.out.print("Person 1 ");
+      }
+      public void method2() {
+          System.out.print("Person 2 ");
+      }
+  }
 
-public class Student extends Person {
-    public void method1() {
-        System.out.print("Student 1 ");
-        super.method1(); // when compile, it bind `method1()` in Person
-        method2();
-    }
-    public void method2() {
-        System.out.print("Student 2 ");
-    }
-}
+  public class Student extends Person {
+      public void method1() {
+          System.out.print("Student 1 ");
+          super.method1(); // when compile, it bind `method1()` in Person
+          method2();
+      }
+      public void method2() {
+          System.out.print("Student 2 ");
+      }
+  }
 
-public class Undergrad extends Student {
-     public void method2() {
-         System.out.print("Undergrad 2 ");
-     }
-}
+  public class Undergrad extends Student {
+      public void method2() {
+          System.out.print("Undergrad 2 ");
+      }
+  }
 
-Person u = new Undergrad();
-u.method1();
-// 1. it finds `method1()` in Student (extends)
-// 2. `super.method1();` => lead to `method1()` in Person class
-// 3. `method2()` doesn't have calling object, Java will insert `this`
-```
+  Person u = new Undergrad();
+  u.method1();
+  // 1. it finds `method1()` in Student (extends)
+  // 2. `super.method1();` => lead to `method1()` in Person class
+  // 3. `method2()` doesn't have calling object, Java will insert `this`
+  ```
 
 - call to `super`: get bound on compiler time
 - call to `this`: happen at runtime
@@ -408,18 +408,18 @@ How do we:
 
 - Can make any class abstract with keyword:
 
-```java
-public abstract class Person {}
-// cannot create objects of this type
-```
+  ```java
+  public abstract class Person {}
+  // cannot create objects of this type
+  ```
 
 - Class **must** be abstract if any methods are:
 
-```java
-public abstract void monthlyStatement() {}
-// Concrete cubclasses must override this method
-// nice way of forcing subclasses to have this method
-```
+  ```java
+  public abstract void monthlyStatement() {}
+  // Concrete cubclasses must override this method
+  // nice way of forcing subclasses to have this method
+  ```
 
 ### Implementation vs Interface
 
@@ -438,27 +438,27 @@ public abstract void monthlyStatement() {}
 - Interfaces only define required methods
 - Classes can inherit from multiple Interfaces
 
-```java
-// Defined in java.lang.Comparable
-package java.lang;
+  ```java
+  // Defined in java.lang.Comparable
+  package java.lang;
 
-public interface Comparable<E> {
-  // Compare this object's name to o's name
-  // Return <0, 0, > 0 if this object compares
-  // less than, equal to, greater than o.
-  public abstract int compareTo(E o);
-}
-
-public class Person implements Comparable<Person> {
-  private String name;
-  ...
-
-  @Override
-  public int compareTo(Person o) {
-    return this.getName().compareTo(o.getName());
+  public interface Comparable<E> {
+    // Compare this object's name to o's name
+    // Return <0, 0, > 0 if this object compares
+    // less than, equal to, greater than o.
+    public abstract int compareTo(E o);
   }
-}
-```
+
+  public class Person implements Comparable<Person> {
+    private String name;
+    ...
+
+    @Override
+    public int compareTo(Person o) {
+      return this.getName().compareTo(o.getName());
+    }
+  }
+  ```
 
 ### Abstract class or Interface
 
@@ -467,7 +467,7 @@ public class Person implements Comparable<Person> {
 - If you want to define potentially required methods AND common behavior
   - **Abstract class**
 
-## Week5 ) Event-Driven Programming
+## Week 5 ) Event-Driven Programming
 
 - Procedural
   - Code execution follows predictable sequence, based on control logic and program state
@@ -485,4 +485,129 @@ public class Person implements Comparable<Person> {
   ```java
   public void keyPressed() {...}
   public void mousePressed() {...}
+  ```
+
+## Week 6) Searching and Sorting
+
+- Linear Search: in worst-case scenario, it takes O(n)
+
+  ```java
+  public static String findAirportCode(String toFind, Airport[] airports) {
+    int index = 0 ;
+    while (index < airport.length) {
+      Airport a = airports[index];
+      if (toFind.equals(a.getCity())) {
+        return a.getCode();
+      }
+      index++;
+    }
+    return null;
+  }
+  ```
+
+- Binary Search:
+
+  ```java
+  public static String findAirpotCode(String toFind, Airport[] airports) {
+    int low = 0;
+    int high = airports.length;
+    int mid;
+    while (low <= high) {
+      // mid = (low + high) / 2; (POSSIBLE OVERFLOW)
+      mid = low + ((high-low)/2);
+      // compareTo(): compare lexicographically
+      int compare = toFind.compareTo(airports[mid].getCity());
+      if (compare < 0) {
+        high = mid - 1;
+      } else if (compare > 0) {
+        low = mid + 1;
+      } else {
+        return airports[mid].getCode();
+      }
+    }
+    return null;
+  }
+  ```
+
+  |n|2|32|1024|32768|~1M|~1B|
+  |:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+  |log2 n|1|5|10|15|20|30|
+
+### Selection Sort Algorithm
+
+- Find smallest element, swap it with element in location 0
+- Find next smallest element swap it with element in location 1
+- etc.
+
+#### Selection Sort: Basic Algorithm
+
+- For each **positions** `i` from `0` to `length-2`
+    1. Find smallest element in **STILL UNSORTED**
+    2. Swap it with element in **position** `i`
+    3. Find smallest element in **position** `i` to `length-1`
+    4. Swap it with element in **position** `i`
+
+  ```java
+     public static void selectionSort(int[] vals) {
+        int indexMin;
+        for (int i = 0; i < vals.length -1; i++) {
+            // as we move along the Array, assume current index as minValue,
+            // find an actual mininum value looping through all indexes
+            indexMin = i;
+            for(int j = i+1; j < vals.length; j++) {
+                if(vals[j] < vals[indexMin]) {
+                    indexMin = j;
+                }
+            }
+        }
+        // now, we have indexMin
+        // looks array vals, swap i with indexMin(what it supposed to be at i)
+        swap(vals, indexMin, i);
+    }
+  ```
+
+#### Cons of Selection Algorithm
+
+- Considered as slow algorithm: O(n)
+- No matter an array is sorted or not, it take the same amount of time to run selection sort
+
+### Insertion Sort
+
+  ```java
+  public static void insertionSort(int[] vals) {
+    int currInd;
+
+    for(int pos = 1; pos < vals.length; pos++) {
+      currInd = pos;
+
+      while (currInd > 0 && vals[currInd] < vals[currInd -1]) {
+        swap(vals, currInd, currInd -1);
+        currInd = currInd - 1;
+      }
+    }
+  }
+  ```
+
+- For each **position** `i` from `1` to `length-1`
+- Find correct location of `i`th element relative to first `i-1`
+- Swap successive paris to get there
+
+### Optimized merge sort
+
+- Fast
+  - in worse case
+  - on nearly sorted data
+- Stable
+
+### **Comparable** Interface, Revisited
+
+  ```java
+  public class Airpot implements Comparable<Airport> {
+    ...
+    public int compareTo(Airport other) {
+      smaller.compareTo(bigger); // NEGATIVE
+      sameSize.compareTo(otherSameSiz); // 0
+      bigger.compareTo(smaller); // POSITIVE
+    }
+  }
   ```
