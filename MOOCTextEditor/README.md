@@ -225,6 +225,7 @@ for (int i=0; i<2*n; i++) { // O(n): runs 2n times
 |:-|:-|:-|
 |Selection Sort|O(n^2)|O(n^2)|
 |Insertion Sort|O(n)|O(n^2)|
+|Merge Sort|O(n\*log(n))|O(n\*log(n))|
 
 ### Merge Sort (recursion)
 
@@ -233,8 +234,25 @@ if list ahs one element, return.
 
 Divide list in half
 
-Sort first half //RECURSION
-Sort second half //RECURSION
+Sort first half // RECURSION
+Sort second half // RECURSION
 
 Merge sorted lists
+```
+
+||Best case|Average case|Worst case|
+|:-|:-|:-|:-|
+|Selection Sor t|O(n^2)|O(n^2)|O(n^2)|
+|Insertion Sort|O(n)|O(n^2)|O(n^2)|
+|Merge Sort|O(n\*log(n))|O(n\*log(n))|O(n\*log(n))|
+|Quick Sort|O(n\*log(n))|O(n\*log(n))|O(log(n^2))|
+*Asymptotic is not the only measure of performance
+
+### Benchmarking and Timing
+
+```java
+long startTime = System.nanoTime();
+methodToDetermine();
+long endTime = System.nanoTime();
+System.out.println((endTime- startTime)/100000000); // millisecond
 ```

@@ -67,40 +67,27 @@ public abstract class Document {
 	 *         syllables. You should consider y a vowel.
 	 */
 	protected int countSyllables(String word) {
-		// TODO: Implement this method so that you can call it from the
-		// getNumSyllables method in BasicDocument (module 2) and
-		// EfficientDocument (module 3).
-		// 1. ends with e don't count - "blame": 1
-		// 2. repeated vowels count as 1 - "Senteeeeence": 2
-		// 3. continuous vowels count as 1 - "contiguous": 3
-		String lowerCaseWord = word.toLowerCase();
-		char[] cArray = lowerCaseWord.toCharArray();
+		// System.out.print("Counting syllables in " + word + "...");
+		int numSyllables = 0;
+		boolean newSyllable = true;
 		String vowels = "aeiouy";
-		int totalSyllable = 0;
-		boolean isSearching = true;
-
+		char[] cArray = word.toCharArray();
 		for (int i = 0; i < cArray.length; i++) {
-			int vowelIndex = vowels.indexOf(cArray[i]);
-			// if still counting, and vowel is found
-			if (isSearching && vowelIndex >= 0) {
-				// count syllable
-				totalSyllable++;
-				// searching status to false (start Searching if there's no
-				// vowel found)
-				// continuous vowels will not count
-				isSearching = false;
+			if (i == cArray.length - 1
+					&& Character.toLowerCase(cArray[i]) == 'e' && newSyllable
+					&& numSyllables > 0) {
+				numSyllables--;
 			}
-			// else if vowel is not found
-			else if (vowelIndex < 0) {
-				// start or keep searching
-				isSearching = true;
-			}
-			// if last char is `e` than -1 from totalSyllable
-			if (i == cArray.length - 1 && cArray[i] == 'e') {
-				totalSyllable--;
+			if (newSyllable
+					&& vowels.indexOf(Character.toLowerCase(cArray[i])) >= 0) {
+				newSyllable = false;
+				numSyllables++;
+			} else if (vowels.indexOf(Character.toLowerCase(cArray[i])) < 0) {
+				newSyllable = true;
 			}
 		}
-		return totalSyllable;
+		// System.out.println( "found " + numSyllables);
+		return numSyllables;
 	}
 
 	/**
@@ -166,9 +153,9 @@ public abstract class Document {
 	public double getFleschScore() {
 		// TODO: You will play with this method in week 1, and
 		// then implement it in week 2
-		double words = getNumWords();
-		double sentences = getNumSentences();
-		double syllables = getNumSyllables();
+		double words = (double) getNumWords();
+		double sentences = (double) getNumSentences();
+		double syllables = (double) getNumSyllables();
 
 		double score = 206.835 - (1.015 * (words / sentences))
 				- (84.6 * (syllables / words));
