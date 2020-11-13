@@ -256,3 +256,60 @@ methodToDetermine();
 long endTime = System.nanoTime();
 System.out.println((endTime- startTime)/100000000); // millisecond
 ```
+
+## Week 4 ) Abstraction, LinkedList
+
+### Some basics
+
+- List as interface || abstract  (ADT: Abstract Data Type): no implementation
+- Abstraction Barrier (in between ADT and Data Structure): sets the rules of interaction
+- ArrayList - Data Structure (Specific implementation)
+
+### ArrayList vs LinkedList
+
+- How long does it take to add an element to the front of an ArrayList?
+  - O(n)
+- How lon does it take to get a particular element from an ArrayList?
+  - O(1)
+
+- (doubled linked list)
+
+```console
+  head -> | prev - data - next | <=> | prev - data - next | <- tail
+        ListNode
+
+  MyLinkedList: has references to head and tail (pointer) to access all the data
+```
+
+- ArrayList elements has it's own positions on the memory, so you to get an element from ArrayList takes O(1) regardless of what element you choose, however, LinkedList elements is connected to each other, it takes O(n) to get an element from the List.
+
+### Example: Parameterized typed
+
+```java
+public class RememberLast<T> {
+  private T lastElement;
+  private int numElement;
+
+  public RememberLast() {
+    numElements = 0;
+    lastElement = null;
+  }
+
+  public T add (T element) {
+    if(element == null) {
+      throw new NullPointerException("RememberLast Object cannot store null pointers.")
+    }
+    T prevLast = lastElement;
+    lastElement = element;
+    numElements++;
+    return prevLast;
+  }
+}
+
+// Somewhere else...
+RememberLast<Integer> rInt = new RememberLast<>();
+RememberLast<String> rStr = new RememberLast<>();
+
+rInt.add(3);
+rStr.add("Happy");
+```
