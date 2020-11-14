@@ -313,3 +313,59 @@ RememberLast<String> rStr = new RememberLast<>();
 rInt.add(3);
 rStr.add("Happy");
 ```
+
+### Adding to a Linked List
+
+- Insert a new node at the very front
+
+1. create new node
+2. Link new node in
+   1. n.next = head.next;
+   2. n.prev = n.next.prev;
+   3. n.next.prev = n;
+   4. head.next = n; (more generally n.prev.next)
+3. update size
+
+- if you modify head.next first for instance, to point n.next, then the original head.next which was pointing to the first node disappears
+- start with current node(n), one that you wanna insert, assign head.next(previous first node) to n.next, n.next.prev(previous first node's prev which was pointing the head node) to n.prev (because n becomes the first node)
+
+### Testing Practices
+
+1. Black Box Testing
+   1. often more representative of user use of code (to some extent)
+   2. easier to write by someone unfamiliar with the implementation
+2. Clear Box Testing
+   1. more knowledgeable of potential corner cases which might cause incorrect behavior
+
+#### Testing Linked List "Get" Method
+
+> ```java
+> // removes the element at the index indicated or, if the index
+> // is invalid, throw an IndexOutOfBoundsException
+> public E get (int index)
+> ```
+
+1. Test get(0) from an empty list
+
+    ```java
+    // in testGet (in JUnit @Test)
+    try {
+      emptyList.get(0);
+      fail("Check out of bounds");
+    } catch(IndexOutOfBoundsException e) {}
+    ```
+
+2. Test get(-1) from a list with 1 element
+
+    ```java
+    try {
+      shortList.get(-1);
+      fail("Check out of bounds");
+    } catch (IndexOutOfBoundsException e) {}
+    ```
+
+3. Test get(0) from a list with 1 element (maybe one more test: to ensure it works with not just only with first element)
+
+    ```java
+    assertEquals("Check first", (Integer)65, shortList.get(0));
+    ```
