@@ -369,3 +369,29 @@ rStr.add("Happy");
     ```java
     assertEquals("Check first", (Integer)65, shortList.get(0));
     ```
+
+### Markov Process and Probabilities
+
+- Stage 1: Train
+  - Build model based on input String
+  - How to implement the `train()` method?
+  - For each new word: need to keep track of word + next words
+
+- interface: MarkovTextGenerator
+  - train(String)
+  - retrain(String)
+  - generateText(int)
+
+- MarkovTextGeneratorLoL
+  - List\<WordNode\> wordList
+
+```java
+class WordNode {
+  private String word;
+  private List<String> nextWords;
+
+  String getWord(){}
+  void addNextWord(String nextWord) {}
+  String getRandomNextWord(Random gen) {}
+}
+```

@@ -177,13 +177,6 @@ public class MyLinkedListTester {
 		shortList.add(1, "C");
 		assertEquals("C", (String) shortList.get(1));
 
-		try {
-			shortList.add(1, null);
-			fail("Check null pointer");
-		} catch (NullPointerException e) {
-
-		}
-
 	}
 
 	/** Test setting an element in the list */
@@ -205,7 +198,7 @@ public class MyLinkedListTester {
 		// null element
 		try {
 			list2.set(1, null);
-			fail("Check null pointer");
+			fail("Check null element");
 		} catch (NullPointerException e) {
 		}
 

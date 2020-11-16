@@ -34,7 +34,8 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public boolean add(E element) {
 		// TODO: Implement this method
 		if (element == null) {
-			throw new NullPointerException("Check null pointer");
+			throw new NullPointerException(
+					"MyLinkedList cannot store null pointers");
 		}
 		// initialize new LLNode with data
 		LLNode<E> n = new LLNode<>(element);
@@ -83,16 +84,15 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	 */
 	public void add(int index, E element) {
 		// TODO: Implement this method
-		if (element == null) {
-			throw new NullPointerException("Check null pointer");
-		}
-
-		if (index < 0 || (size > 0 && index >= size)
-				|| (size == 0 && index > size)) {
+		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException("Check out of bounds");
+		}
+		if (element == null) {
+			throw new NullPointerException("Null cannot be inserted");
 		}
 
 		if (size == 0 && index == 0) {
+			size++;
 			this.add(element);
 		} else {
 			LLNode<E> currNode = getNode(index);

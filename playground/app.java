@@ -17,3 +17,7 @@ class ListNode<T> {
     this.nextNode = node;
   }
 }
+
+class MyListNode<T> {
+
+}
