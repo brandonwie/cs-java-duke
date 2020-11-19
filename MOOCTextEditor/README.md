@@ -10,6 +10,8 @@
 6. Write JUnit tests to ensure the correctness of your code.
 7. Implement several algorithms for generating and processing text.
 
+---
+
 ## Pre-Course Quiz
 
   ```java
@@ -257,6 +259,8 @@ long endTime = System.nanoTime();
 System.out.println((endTime- startTime)/100000000); // millisecond
 ```
 
+---
+
 ## Week 4 ) Abstraction, LinkedList
 
 ### Some basics
@@ -395,3 +399,254 @@ class WordNode {
   String getRandomNextWord(Random gen) {}
 }
 ```
+
+---
+
+## Week 5 ) Trees
+
+- Why trees?
+  - Dynamic Data Structure
+  - Structure conveys information
+
+- Different organizations -> Different Trees
+  - Root is most important - Heap
+  - Organized by character frequency - Huffman Tree
+  - Organized by node ordering - Search Trees
+  - etc...
+
+### Terminology
+
+- root: no parent
+- Parent
+- Child
+- Leaf: no children
+
+### What defines a tree
+
+- Single root
+- Each node\* can have only one parent(*except the roof)
+- No cycles in a tree
+
+### Binary Tree Code
+
+- How to construct a tree?
+  - Like Linked Lists, Trees have a "Linked Structure"
+- A tree just needs a root node
+- Each node needs:
+  1. A value
+  2. A parent
+  3. A left child
+  4. A right child
+- How would a general tree node differ?
+  - A general tree would just have a list for children
+
+```java
+public class TreeNode<E> {
+  private E value;
+  private TreeNode<E> parent;
+  private TreeNode<E> left;
+  private TreeNode<E> right;
+
+  public TreeNode(E val, TreeNode<E> par) {
+    this.value = val;
+    this.parent = par;
+    this.left = null;
+    this.right = null;
+  }
+
+  public TreeNode<E> addLeftChild(E val) {
+    this.left = new TreeNode<E>(val, this);
+    return this.left;
+  }
+}
+```
+
+### Search Methods
+
+> Order we visit matters
+
+- Breadth-first search (BFS)
+- Depth-first search (DFS)
+
+### Tree Traversals
+
+- pre-order traversal
+  - process all node of a tree by processing the root, then recursively processing all subtrees. Also known as `prefix traversal`
+  - recursion helps to travel
+
+```java
+public class BinaryTree<E> {
+  TreeNode<E> root;
+  //...
+  private void preOrder(TreeNode<E> node) {
+    if (node != null) {
+      node.visit();
+      preOrder(node.getLeftChild());
+      preOrder(node.getRightChild());
+    }
+  }
+  public void preOrder() {
+    this.preOrder(root);
+  }
+}
+```
+
+### Traversals (using recursion)
+
+- Pre-Order: Depth First Search
+  1. root
+  2. left
+  3. right
+
+- Post-Order: Depth First Search
+  1. left
+  2. right
+  3. root
+
+- In-Order: Depth First Search
+  1. left
+  2. root
+  3. right
+
+- Level-Order: Breath-First Traversal
+  - from top root, line by line
+  - keep a list and keep adding to it and removing from start
+
+  ```java
+  public class BinaryTree<E> {
+    TreeNode<E> root;
+
+    public void levelOrder() {
+      Queue< TreeNode<E> > q = new LinkedList< TreeNode<E> > ();
+      q.add(root);
+      while(!q.isEmpty()) {
+        TreeNode<E> curr = q.remove();
+        // if Q is empty do nothing, if not,
+        if(curr != null) {
+          // visit what's removed from Q
+          curr.visit();
+          // could also check for null children before adding
+          q.add(curr.getLeftChild());
+          q.add(curr.getRightChild());
+        }
+      }
+    }
+  }
+  ```
+
+### Binary Search Tree - Searching
+
+- Traverse down tree until:
+  1. end is reached
+  2. element is found
+- ***DO NOT CHANGE ROOT POINTER***
+
+```java
+public class BST<E extends Comparable <? super E>> {
+  public boolean contains(E toFind) {
+    // curr is the one changes, not root
+    TreeNode<E> curr = root;
+    int comp;
+    while (curr != null) {
+      // if calling object is less than parameter, compareTo returns a value < 0
+      comp = toFind.compareTo(curr.getData());
+      if (comp < 0>) {
+        curr = curr.getLeft();
+      } else if (comp > 0) {
+          curr = curr.getRight();
+      } else {
+        return true; // returns 0 when calling object is equal to parameter
+      }
+    }
+    return false;
+  }
+}
+```
+
+- Sorted Array (i.e. Binary Search Tree) is great for search
+- But, insertion or removal, linkedlist or trees are much better for performanc
+
+### Inserting into a BST
+
+- simple algorithm applies:
+  - from the root, if element is smaller, move left, larger, move right until the left, or right is null(empty space); that's the place
+- there's no rule that BST will be **full** trees (or **balanced**)
+
+```java
+public boolean insert(E toInsert) {
+  TreeNode<E> curr = root;
+  int comp = toInsert.compareTo(curr.getData());
+  // stop loop when either side where toInsert should go is empty
+  while (comp < 0 && curr.getLeft() != null ||
+         comp > 0 && curr.getRight() != null) {
+    if (comp < 0>) curr = curr.getLeft();
+    else curr = curr.getRight();
+    // continue comparison with a new left||right node
+    comp = toInsert.compareTo(curr.getData());
+  }
+  // after the loop either:
+  // (1) curr points to the last node
+  if (comp < 0)
+    curr.setLeftChild(toInsert, curr);
+  else if (comp > 0)
+    curr.setRightChild(toInsert, curr);
+  // (2) we found the element (`comp == 0` means calling obj matches param)
+  else return false;
+}
+```
+
+### Deletion of BST
+
+- single child node: easy - just delete node and connect child node to parent node
+- binary child: algorithm is needed
+  1. Find **SMALLEST VALUE in RIGHT SUBTREE**
+  2. ***which means the value does not have left subtree (null)***
+  3. **REPLACE** deleted element with smallest right subtree value
+  4. then delete right subtree duplicate
+
+### Performance of BST
+
+- Structure of a BST depends on the order of insertion
+
+- possible algorithm
+
+  ```java
+  public void isWord(String wordToFind) {
+    Node<E> curr = root;
+    int comp = wordToFind.compareTo(curr.getData());
+    while (comp != null) {
+    if (comp < 0)
+      curr = curr.getLeft();
+    else if (comp > 0)
+      curr = curr.getRight();
+    else
+      return true;
+    }
+    return false;
+
+  }
+  ```
+
+- isWord performances
+  - best case: O(1) - e.g.) directly match desired value
+  - general case: O(log(n)) - assume that the tree is balanced
+  - worst case: O(n) - e.g.) singular tree (technically it's not binary)
+
+- Balanced BST: `|LeftHeight - RightHeight| <= 1`
+- isWord(String wordToFind)
+  ||Best|Average|Worst|
+  |:---|:---:|:---:|:---:|
+  |Linked List|O(1)|O(n)|O(n)|
+  |BST|O(1)|O(log n)|O(n)|
+  |Balanced BST|O(1)|O(log n)|O(log n)|
+  \**Especially if insert to BST in order!*
+  \* How to keep balanced? TreeSet in Java API
+
+### Tries (reTRIEval)
+
+> it's named trie[try] to disambiguate it from the word tree
+
+- Explain what a trie data structure is
+- Describe the algorithm for finding keys in and adding keys to a trie
+
+1. Storing a dictionary as a (balanced) BST
