@@ -165,9 +165,7 @@ public class NearbyWords implements SpellingSuggest {
 		// TODO: Implement the remainder of this method, see assignment for
 		// algorithm
 		// Optional Optimization
-		int count = 0;
-		while (retList.size() < numSuggestions && !queue.isEmpty()
-				&& count < THRESHOLD) {
+		while (retList.size() < numSuggestions && !queue.isEmpty()) {
 			String curr = queue.remove(0);
 			List<String> lst = distanceOne(curr, true);
 			for (String w : lst) {
@@ -178,7 +176,6 @@ public class NearbyWords implements SpellingSuggest {
 						retList.add(w);
 					}
 				}
-				count++;
 			}
 		}
 

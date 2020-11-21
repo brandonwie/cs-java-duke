@@ -3,8 +3,10 @@
  */
 package spelling;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * WPTree implements WordPath by dynamically creating a tree of words during a
@@ -39,7 +41,43 @@ public class WPTree implements WordPath {
 	// see method description in WordPath interface
 	public List<String> findPath(String word1, String word2) {
 		// TODO: Implement this method.
-		return new LinkedList<String>();
+		// create a queue of WPTreeNodes to hold words to explore
+		Queue<WPTreeNode> queue = new LinkedList<>();
+		// create a visited set to avoid looking at the same word repeatedly
+		HashSet<String> visited = new HashSet<>();
+
+		// set the root to be a WPTreeNode containing word1
+		root = new WPTreeNode(word1, null);
+		// add the initial word to visited
+		visited.add(word1);
+		// add root to the queue
+		queue.add(root);
+
+		// while the queue has elements and we have not yet found word2
+		while (queue.size() > 0 && !visited.contains(word2)) {
+			// remove the node from the start of the queue and assign to curr
+			WPTreeNode curr = queue.remove();
+			// get a list of real word neighbors (one mutation from curr's word)
+			List<String> lst = nw.distanceOne(curr.getWord(), true);
+			// for each n in the list of neighbors
+			for (String n : lst) {
+				// if n is not visited
+				if (!visited.contains(n)) {
+					// add n as a child of curr (return child)
+					WPTreeNode nNode = curr.addChild(n);
+					// add n to the visited set
+					visited.add(n);
+					// add the node for n to the back of the queue
+					queue.add(nNode);
+					// if n is word2
+					if (n.equals(word2)) {
+						// return the path from child to root
+						return nNode.buildPathToRoot();
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	// Method to print a list of WPTreeNodes (useful for debugging)
